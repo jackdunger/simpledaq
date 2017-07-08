@@ -1,9 +1,9 @@
 CC=gcc
 CAENDIGLIB=CAENDigitizer
 
-bin/simpledaq: src/simpledaq.c
+bin/simpledaq: src/*.c
 	mkdir -p bin
-	$(CC) $< -l$(CAENDIGLIB) -o $@
+	$(CC) $^ -l$(CAENDIGLIB) -o $@ inih/ini.c  -Iinih -Isrc
 
 clean:
 	rm -rf bin

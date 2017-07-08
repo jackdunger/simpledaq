@@ -1,30 +1,24 @@
-#include <stdio.h>
+#include <config.h>
+#include <acquisition.h>
 #include <CAENDigitizer.h>
-
+#include <stdio.h>
 int main(int argc, char* argv[]){
-	int handle;
-	CAEN_DGTZ_ErrorCode err = CAEN_DGTZ_OpenDigitizer(CAEN_DGTZ_USB, 0, 0, 0, &handle);
-	CAEN_DGTZ_BoardInfo_t info;
+  if (argc != 2){
+    printf("Usage:\n simpledaq <path_to_config_file>\n");
+    return 1;
+  }
 
-	if(err){
-		printf("can't open\n");
-		return 1;
-	}
-	
-	err = CAEN_DGTZ_GetInfo(handle, &info);
-	
-	if(err){
-		printf("can't get info");
-		printf("%d\n", err);
-		return 3;
-	}
+  // parse and log the configuration file
+  SDQ_Config_t config;
+  SDQ_ERROR err = SDQ_ParseConfig(argv[1], &config);
+  if(err)
+    return err;
 
-	printf(info.ModelName);
-	err = CAEN_DGTZ_CloseDigitizer(handle);
-	if(err){
-		printf("can't close");
-		return 2;
-	}
+  SDQ_PrintConfig(config);
 
-	return 0;
+  // run the experiment
+  err = SDQ_RunAcquisition(config);
+  
+
+  return 0;
 }
