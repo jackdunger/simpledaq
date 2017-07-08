@@ -1,4 +1,4 @@
-Really basic DAQ for CAEN digitizers
+Really basic DAQ for CAEN digitizer D720
 
 Dependencies:
 * Linux driver
@@ -9,5 +9,7 @@ Dependencies:
 To compile:
 `make`
 
-To run:
-`simpledaq`
+You then need to write a configuration file with fields that match those in `config.example.ini`
+
+Then to run:
+`bin/simpledaq <path_to_configuration_file>`
