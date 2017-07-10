@@ -11,6 +11,8 @@ Dependencies:
 
 Available [here](http://www.caen.it/csite/Function.jsp?parent=38&idfun=99) and [here](http://www.caen.it/csite/CaenProd.jsp?parent=14&idmod=624)
 
+Get it with a download or a clone (remember the git submodule).
+
 To compile:
 `make`
 
@@ -26,6 +28,9 @@ This will produce two things with paths specified in the configuration file
 
 `<eventDir>/event_0.dat` `<eventDir>/event_1.dat` ...
 
+SimpleDAQ is about the simplest use of the (C) CAENDigitizer library imaginable: it internally triggers off one of its channels and reads out that same channel. The hardware and CAENDigitizer are by no means limited to this, documentation [available here](http://www.caen.it/csite/CaenProd.jsp?parent=38&idmod=717#).
+
+Over USB, the digitizer is unable to annouce to its driver that it's time to readout events. Instead, it gradually fills up its internal buffer and the driver polls it triggering a readout of the events in the buffer up to a maximum number.
 
 Note:
 * the clock is 250MHz, so the samples are 4 ns apart
