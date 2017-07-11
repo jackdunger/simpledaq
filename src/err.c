@@ -36,9 +36,9 @@
   X(-32, CAEN_DGTZ_UnsupportedTrace,         " The given trace is not supported by the digitizer ")               \
   X(-33, CAEN_DGTZ_InvalidProbe,             " The given probe is not supported for the given digitizer's trace ")\
   X(-99, CAEN_DGTZ_NotYetImplemented,        " The function is not yet implemented ")                             \
-  X(1,   CONFIG_MISSING,                     " Unable to open specified configuration file ")                     \
-  X(2,   CONFIG_PARSE_ERROR,                 " Failed to parse specified configuration file ")                             \
-
+  X(1,   CONFIG_OPEN_ERROR,                  " Unable to open specified configuration file ")                     \
+  X(2,   CONFIG_PARSE_ERROR,                 " Failed to parse specified configuration file ")                    \
+  
 
 
 
@@ -47,7 +47,7 @@
 
 
 // prints out the error message associated with that int
-const char* error_msg(int code){
+const char* SDQ_Error_Message(int code){
   switch (code) {
     ERROR_CODES(ERROR_TEXT)
       }

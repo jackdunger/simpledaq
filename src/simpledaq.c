@@ -12,9 +12,18 @@ int main(int argc, char* argv[]){
 
   // parse and log the configuration file
   SDQ_Config_t config;
+  SDQ_ConfigToDummy(&config);
   SDQ_ERROR err = SDQ_ParseConfig(argv[1], &config);
+
   if(err){
-    printf("Execution failed with: %s\n" , error_msg(err));
+    printf("Execution failed with: %s\n" , SDQ_Error_Message(err));
+    return err;
+  }
+  
+  err = SDQ_CheckConfigAgainstDummy(&config);
+
+  if(err){
+    printf("Execution failed with: %s\n" , SDQ_Error_Message(err));
     return err;
   }
 
@@ -25,7 +34,7 @@ int main(int argc, char* argv[]){
   err = SDQ_RunAcquisition(config);
   
   if(err){
-    printf("Execution failed with: %s\n" , error_msg(err));
+    printf("Execution failed with: %s\n" , SDQ_Error_Message(err));
     return err;
   }
 
