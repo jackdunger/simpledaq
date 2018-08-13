@@ -74,12 +74,13 @@ SDQ_ERROR SDQ_RunAcquisition(SDQ_Config_t config){
   uint32_t eventsAquired = 0;
 
   for(iReadOut = 0; iReadOut < config.nReadouts; iReadOut++){
-    // open a file to dump the event intox
+    // open a file to dump the event in tox
     sleep(1/config.polFreq);
 
-    err = ReadoutEvents(devHandle, config.channel, 
-			buffer,
-			headerFile, config.eventDir, &eventsAquired);
+    err = ReadoutEvents(devHandle, config.channel,
+                        buffer,
+                        headerFile, config.eventDir,
+                        &eventsAquired);
 
     if(err){
       CleanUp(devHandle, buffer);
@@ -93,7 +94,8 @@ SDQ_ERROR SDQ_RunAcquisition(SDQ_Config_t config){
 }
 
 
-SDQ_ERROR ReadoutEvents(int handle, uint32_t channel, char * buffer, FILE* headerFile, const char* eventDir, uint32_t* nEvents){
+SDQ_ERROR ReadoutEvents(int handle, uint32_t channel, char * buffer, FILE* headerFile,
+                        const char* eventDir, uint32_t* nEvents){
   // readout the data block
   uint32_t bufSize;
   CAEN_DGTZ_ErrorCode err = CAEN_DGTZ_ReadData(handle, CAEN_DGTZ_SLAVE_TERMINATED_READOUT_MBLT, 

@@ -19,7 +19,8 @@ int main(int argc, char* argv[]){
     printf("Execution failed with: %s\n" , SDQ_Error_Message(err));
     return err;
   }
-  
+
+  // check the configuration is of the required format
   err = SDQ_CheckConfigAgainstDummy(&config);
 
   if(err){

@@ -17,7 +17,7 @@ int match(const char* s, const char* n, const char* section, const char* name){
 
 static int handler(void* user, const char* section, const char* name,
 		   const char* value){
-
+    
   SDQ_Config_t* pconfig = (SDQ_Config_t*)user;
 
   if (match("settings", "maxEventsRead", section, name)) {
@@ -60,6 +60,8 @@ static int handler(void* user, const char* section, const char* name,
 }
 		  
 SDQ_ERROR SDQ_PrintConfig(SDQ_Config_t config){
+    /* string format the config struct and print it to screen
+     */
   printf("--------------------------------------------------------------------------------\n");
   printf("maxEventsRead = %d\n", config.maxEventsRead);
   printf("recordLength = %d\n", config.recordLength);
@@ -79,7 +81,6 @@ SDQ_ERROR SDQ_PrintConfig(SDQ_Config_t config){
 
 
 void  SDQ_ConfigToDummy(SDQ_Config_t* config){
-  // set these values to something invalid so we can check that the user remembered to specify them in the config file
   config -> maxEventsRead = -1;
   config -> recordLength  = -1;
   config -> postTriggerSize = -1;
